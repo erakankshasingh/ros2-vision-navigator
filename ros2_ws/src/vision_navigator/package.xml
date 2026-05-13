@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>vision_navigator</name>
+  <version>0.1.0</version>
+  <description>
+    On-device ROS2 vision navigation pipeline: publishes camera frames,
+    runs a quantized TFLite obstacle detector, and emits navigation commands.
+  </description>
+  <maintainer email="erakankshasingh@gmail.com">Akanksha Singh</maintainer>
+  <license>MIT</license>
+
+  <exec_depend>rclpy</exec_depend>
+  <exec_depend>sensor_msgs</exec_depend>
+  <exec_depend>std_msgs</exec_depend>
+  <exec_depend>cv_bridge</exec_depend>
+
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+</package>
