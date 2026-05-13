@@ -17,6 +17,31 @@ on the parts that matter for embedded autonomy:
 The same architecture would drop onto a Jetson, a Raspberry Pi, or a Qualcomm
 RB5 with only the camera source swapped.
 
+## Status
+
+Living checklist — the source of truth for what works, what's a stub, and
+what's missing. Updated as the project moves forward.
+
+**Pipeline nodes**
+- [x] `camera_node` — loads images from disk, publishes `sensor_msgs/Image` at 10 Hz
+- [ ] `detector_node` — TFLite inference on `/camera/image` → `/detections` *(stub)*
+- [ ] `navigator_node` — decision logic on `/detections` → `/cmd_nav` *(stub)*
+
+**Assets**
+- [ ] `ros2_ws/src/vision_navigator/test_images/` — sample input frames
+- [ ] `ros2_ws/src/vision_navigator/models/model_quant.tflite` — INT8 model
+- [ ] `scripts/quantize_model.py` — Float32 → INT8 conversion
+
+**Local environment**
+- [x] Conda env `ros2_vision` (Python 3.11) with numpy + opencv
+- [ ] TensorFlow / tflite-runtime (deferred until detector is real)
+- [ ] ROS2 Jazzy via RoboStack
+- [ ] `colcon build --symlink-install` verified
+
+**Verification**
+- [x] All node files compile (`python -m py_compile`)
+- [ ] End-to-end run: camera → detector → navigator publishes `/cmd_nav`
+
 ## Architecture
 
 ```
