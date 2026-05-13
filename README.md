@@ -35,7 +35,7 @@ what's missing. Updated as the project moves forward.
 **Local environment**
 - [x] Conda env `ros2_vision` (Python 3.11) with numpy + opencv
 - [ ] TensorFlow / tflite-runtime (deferred until detector is real)
-- [ ] ROS2 Jazzy via RoboStack
+- [x] ROS2 Humble via RoboStack (`ros-humble-desktop` + `colcon-common-extensions`)
 - [ ] `colcon build --symlink-install` verified
 
 **Verification**
@@ -88,7 +88,7 @@ ros2-vision-navigator/
 
 ## Tech stack
 
-- **ROS2 Jazzy** (runs on macOS via RoboStack/conda; Linux native otherwise)
+- **ROS2 Humble** (runs on macOS via RoboStack/conda; Linux native otherwise. Jazzy requires native arm64 conda — Humble is what RoboStack ships for `osx-64`.)
 - **Python 3.11**
 - **TensorFlow Lite** for on-device inference
 - **OpenCV** for image loading and preprocessing
@@ -97,10 +97,13 @@ ros2-vision-navigator/
 ## Setup
 
 ```bash
-# 1. Create a conda environment with ROS2 Jazzy
+# 1. Create a conda environment with ROS2 Humble
 conda create -n ros2_vision python=3.11
 conda activate ros2_vision
-conda install -c robostack-staging ros-jazzy-desktop
+conda config --env --add channels conda-forge
+conda config --env --add channels robostack-staging
+conda config --env --set channel_priority strict
+conda install ros-humble-desktop colcon-common-extensions
 
 # 2. Install Python dependencies
 pip install -r requirements.txt
