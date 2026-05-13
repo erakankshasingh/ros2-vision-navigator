@@ -36,10 +36,11 @@ what's missing. Updated as the project moves forward.
 - [x] Conda env `ros2_vision` (Python 3.11) with numpy + opencv
 - [ ] TensorFlow / tflite-runtime (deferred until detector is real)
 - [x] ROS2 Humble via RoboStack (`ros-humble-desktop` + `colcon-common-extensions`)
-- [ ] `colcon build --symlink-install` verified
+- [x] `colcon build --symlink-install` verified (`setup.cfg` routes entry points to `lib/vision_navigator/` for `ros2 run`)
 
 **Verification**
 - [x] All node files compile (`python -m py_compile`)
+- [x] `ros2 run vision_navigator camera_node` launches under ROS2 (idles with no images — expected)
 - [ ] End-to-end run: camera → detector → navigator publishes `/cmd_nav`
 
 ## Architecture
