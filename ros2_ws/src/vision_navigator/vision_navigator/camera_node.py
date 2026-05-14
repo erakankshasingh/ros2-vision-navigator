@@ -10,6 +10,7 @@ from pathlib import Path
 
 import cv2
 import rclpy
+from ament_index_python.packages import get_package_share_directory
 from cv_bridge import CvBridge
 from rclpy.node import Node
 from sensor_msgs.msg import Image
@@ -26,11 +27,15 @@ class CameraNode(Node):
         self.declare_parameter('publish_rate_hz', 10.0)
         self.declare_parameter('loop', True)
 
-        image_dir = self.get_parameter('image_dir').get_parameter_value().string_value
+        image_dir_param = self.get_parameter('image_dir').get_parameter_value().string_value
         rate_hz = self.get_parameter('publish_rate_hz').get_parameter_value().double_value
         self._loop = self.get_parameter('loop').get_parameter_value().bool_value
 
-        self._frames = self._load_frames(Path(image_dir))
+        image_dir = Path(image_dir_param)
+        if not image_dir.is_absolute():
+            image_dir = Path(get_package_share_directory('vision_navigator')) / image_dir
+
+        self._frames = self._load_frames(image_dir)
         if not self._frames:
             self.get_logger().error(f"No images found in '{image_dir}'. Camera node will idle.")
         else:
