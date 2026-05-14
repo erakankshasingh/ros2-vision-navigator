@@ -1,4 +1,9 @@
 numpy>=1.24,<2.0
 opencv-python>=4.8
-tflite-runtime>=2.14; platform_machine != "arm64" or sys_platform != "darwin"
-tensorflow>=2.15; platform_machine == "arm64" and sys_platform == "darwin"
+# TFLite runtime: Google rebranded tflite-runtime as ai-edge-litert (LiteRT).
+# ai-edge-litert ships wheels for macOS x86_64 / arm64 and Linux, which the
+# legacy tflite-runtime does not on this platform mix.
+ai-edge-litert>=1.0
+# tensorflow is only required when (re)quantizing a model via
+# scripts/quantize_model.py; not needed to run inference.
+tensorflow>=2.15; extra == "quantize"

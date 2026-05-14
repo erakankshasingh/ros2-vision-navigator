@@ -13,6 +13,8 @@ setup(
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
         ('share/' + package_name + '/test_images', glob('test_images/*.png')),
+        ('share/' + package_name + '/models',
+            glob('models/detect.tflite') + glob('models/labelmap.txt')),
     ],
     install_requires=['setuptools'],
     zip_safe=True,

@@ -28,5 +28,8 @@ ros2_ws/log/
 .idea/
 *.swp
 
-# Model artifacts (large; regenerate via scripts/quantize_model.py)
+# Model artifacts (large or regenerable; fetch via scripts/download_model.py
+# or scripts/quantize_model.py rather than committing)
 *.h5
+*.tflite
+ros2_ws/src/vision_navigator/models/labelmap.txt
